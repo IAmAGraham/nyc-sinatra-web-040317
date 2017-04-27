@@ -1,0 +1,23 @@
+<!-- dropdown or open text area -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <form action="/figures" method="post">
+      <input type="text" placeholder="figure name" name="figure[name]" />
+      <input type="text" placeholder="title" name="figure[title_ids][]" />
+      <!-- make this a drop down -->
+      <input type="text" placeholder="landmark" name="figure[landmark_ids][]" />
+      <!-- make this a drop down -->
+      <input type="text" placeholder="landmark" name="landmark[name]" />
+
+      <input type="text" placeholder="title" name="title[name]" />
+
+      <input type="submit" name="submit" value="submit" />
+  </form>
+  </body>
+</html>
