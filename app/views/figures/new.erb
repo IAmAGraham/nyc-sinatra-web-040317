@@ -1,4 +1,4 @@
-<!-- dropdown or open text area -->
+
 
 <!DOCTYPE html>
 <html>
@@ -7,17 +7,32 @@
     <title></title>
   </head>
   <body>
-    <form action="/figures" method="post">
-      <input type="text" placeholder="figure name" name="figure[name]" />
-      <input type="text" placeholder="title" name="figure[title_ids][]" />
-      <!-- make this a drop down -->
-      <input type="text" placeholder="landmark" name="figure[landmark_ids][]" />
-      <!-- make this a drop down -->
-      <input type="text" placeholder="landmark" name="landmark[name]" />
+    <form action="/figures" method="POST">
+      <h2>Name</h2>
+        <input type="text" id="figure_name" name="figure[name]" />
 
-      <input type="text" placeholder="title" name="title[name]" />
+      <h3>Titles</h3>
+        <%Title.all.each do |title|%>
+          <p><%=title.name%></p>
+          <input type="checkbox" id="title_<%=title.id%>" name="figure[title_ids][]" value="<%= title.id %>"/>
+        <%end%>
 
-      <input type="submit" name="submit" value="submit" />
-  </form>
+     <h3>Create New Title:</h3>
+      <input type="text" id="new_title" name="title[name]" />
+
+
+      <h3>Landmarks</h3>
+        <%Landmark.all.each do |landmark|%>
+          <%= landmark.name %>
+          <input type="checkbox" id="landmark_<%=landmark.id%>" name="figure[landmark_ids][]" value="<%= landmark.id %>" />
+
+        <% end %>
+     <h3>Create New Landmark:</h3>
+     <h4>Name:</h4>
+      <input type="text" id="new_landmark" name="landmark[name]" />
+      <h4>Year:</h4>
+      <input type="text" name="landmark[year_completed]" />
+      <input type="submit" value="Create New Figure" />
+    </form>
   </body>
 </html>
