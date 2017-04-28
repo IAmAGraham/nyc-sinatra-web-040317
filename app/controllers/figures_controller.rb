@@ -1,3 +1,5 @@
+require 'pry'
+
 class FiguresController < ApplicationController
 
   get '/figures' do
@@ -11,12 +13,14 @@ class FiguresController < ApplicationController
 
   get '/figures/:id' do
     @figure = Figure.find(params[:id])
-    erb :'figures/show'
+    erb :'/figures/show'
   end
 
-  get 'figures/:id/edit' do
+  get '/figures/:id/edit' do
     @figure = Figure.find(params[:id])
-    erb :'figures/edit'
+    @landmarks = Landmark.all
+    @titles = Title.all
+    erb :'/figures/edit'
   end
 
   post '/figures' do
@@ -24,15 +28,16 @@ class FiguresController < ApplicationController
     if params[:landmark][:name].present?
       @figure.landmarks << Landmark.create(params[:landmark])
     end
-    if params[:landmark][:name].present?
+    if params[:title][:name].present?
       @figure.titles << Title.create(params[:title])
     end
     @figure.save
     redirect to "/figures/#{@figure.id}"
   end
 
-  post 'figures/:id' do
-    @figure = Figure.create(params[:id])
+  post '/figures/:id' do
+    binding.pry
+    @figure = Figure.find(params[:id])
     @figure.update(params[:figure])
     if params[:landmark][:name].present?
       @figure.landmarks << Landmark.create(params[:landmark])
